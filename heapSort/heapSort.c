@@ -74,10 +74,9 @@ void heapify(int *tab, int n, int k) {
         if (max != k) {
             swap(tab, k, max);
             k = max;
-        }
-
-        else 
+        } else {
             break;
+        }
     }
 }
 
