@@ -33,7 +33,7 @@ public class Al62 {
 		int index;
 		for (String word : data) {
 			index = hash(word, m);
-			tab[index*2 % tab.length]++;
+			tab[index]++;
 		}
 	}
 	
@@ -75,7 +75,7 @@ public class Al62 {
 			Arrays.fill(tab1, 0);
 			test(data, tab1, m);
 			System.out.println("-------------------------------");
-			m = 1250;
+			m = 2791;
 			int tab2[] = new int[m];
 			Arrays.fill(tab2, 0);
 			test(data, tab2, m);
