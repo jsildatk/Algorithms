@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Al62 {
+public class Main {
 	private static String[] readLines(String filename) throws IOException {
 		FileReader fileReader = new FileReader(filename);
 		BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -75,7 +75,7 @@ public class Al62 {
 			Arrays.fill(tab1, 0);
 			test(data, tab1, m);
 			System.out.println("-------------------------------");
-			m = 2791;
+			m = 511;
 			int tab2[] = new int[m];
 			Arrays.fill(tab2, 0);
 			test(data, tab2, m);
