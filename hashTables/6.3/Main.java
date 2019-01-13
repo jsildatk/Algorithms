@@ -41,7 +41,10 @@ public class Main {
 			ArrayList<Record> emptyData = readFromFile("nazwiska");
 			reset(data80, 15999, 19999);
 			reset(emptyData, 0, 19999);
-			Hash.hashValues(data80, emptyData, 20000);
+			int[] keys = Hash.hashValues(data80);
+			for (int i = 0; i < 20000; i++) {
+				Hash.insertHash(data80, emptyData, keys[i], 20000, i);
+			}
 			Hash.search(emptyData, data80);
 			writeToFile(emptyData, "outHash");
 		} catch (IOException e) {

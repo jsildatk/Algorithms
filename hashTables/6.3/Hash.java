@@ -17,13 +17,23 @@ public class Hash {
 		int mod2 = i * (1 + k % (m - 2));
 		return (mod1 + mod2) % m;
 	}
+
+	public static int[] hashValues(ArrayList<Record> data) {
+		int[] temp = new int[20000];
+		for (int i = 0; i < data.size(); i++) {
+			temp[i] = hashString(data.get(i).getSurname());
+		}
+		return temp;
+	}
 	
-	public static void hashValues(ArrayList<Record> data, ArrayList<Record> result, int m) {
+	public static void insertHash(ArrayList<Record> data, ArrayList<Record> result, int k, int m, int p) {
+		int index;
 		for (int i = 0; i < m; i++) {
-			int index = hash(hashString(data.get(i).getSurname()), m, i);
-			if (result.get(index).getNumber() == "0") {
-				result.get(index).setNumber(data.get(i).getNumber());
-				result.get(index).setSurname(data.get(i).getSurname());
+			index = hash(k, m, i);
+			if (result.get(index).getSurname() == "Brak") {
+				result.get(index).setSurname(data.get(p).getSurname());
+				result.get(index).setNumber(data.get(p).getNumber());
+				return;
 			}
 		}
 	}
@@ -44,5 +54,5 @@ public class Hash {
 			}
 		}
 		printWriter.close();
-	}
+}
 }
