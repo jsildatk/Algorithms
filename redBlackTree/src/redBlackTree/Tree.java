@@ -12,18 +12,64 @@ public class Tree {
 			this.key = key;
 		}
 	}
-	static final int RED = 0;
-	static final int BLACK = 1;
-	final Node nil = new Node(-1);
+	private static int redNodes = 0;
+	private static int leftDepth = 0;
+	private static int rightDepth = 0;
+	private static final int RED = 0;
+	private static final int BLACK = 1;
+	private final Node nil = new Node(-1);
 	public Node root = nil;
 	
 	public void print(Node node) { // inorder
+		String temp;
 		if (node == nil) {
 			return;
 		}
 		print(node.left);
-		System.out.println(node.key + " " + node.color);
+		if (node.color == RED) {
+			temp = "R";
+		} else {
+			temp = "B";
+		}
+		System.out.println(node.key + " " + temp);
 		print(node.right);
+	}
+	
+	public int countRedNodes(Node node) {
+		if (node != nil) {
+			if (node.color == RED) {
+				redNodes++;
+			}
+			countRedNodes(node.left);
+			countRedNodes(node.right);
+		}
+		return redNodes;
+	}
+	
+	public int maxDepth(Node node) {
+		if (node == nil) {
+			return 0;
+		}
+		leftDepth = maxDepth(node.left);
+		rightDepth = maxDepth(node.right);
+		if (leftDepth > rightDepth) {
+			return leftDepth+1;
+		} else {
+			return rightDepth+1;
+		}
+	}
+	
+	public int minDepth(Node node) {
+		if (node == nil) {
+			return 0;
+		}
+		leftDepth = minDepth(node.left);
+		rightDepth = minDepth(node.right);
+		if (leftDepth < rightDepth) {
+			return leftDepth+1;
+		} else {
+			return rightDepth+1;
+		}
 	}
 	
 	public void insert(Node node) {
