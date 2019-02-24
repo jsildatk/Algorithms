@@ -1,24 +1,23 @@
 package redBlackTree;
 
 public class Tree {
-	public class Node {
-		int key = -1;
-		int color = BLACK;
-		Node left = nil;
-		Node right = nil;
-		Node parent = nil;
-		
-		public Node(int key) {
-			this.key = key;
-		}
-	}
-	private static int redNodes = 0;
-	private static int leftDepth = 0;
-	private static int rightDepth = 0;
+	private int redNodes = 0;
 	private static final int RED = 0;
 	private static final int BLACK = 1;
-	private final Node nil = new Node(-1);
-	public Node root = nil;
+	private final static Node nil = new Node(-1);
+	private Node root = nil;
+	
+	public Node getRoot() {
+		return this.root;
+	}
+	
+	public static int getBlack() {
+		return BLACK;
+	}
+	
+	public static Node getNil() {
+		return nil;
+	}
 	
 	public void print(Node node) { // inorder
 		String temp;
@@ -38,20 +37,20 @@ public class Tree {
 	public int countRedNodes(Node node) {
 		if (node != nil) {
 			if (node.color == RED) {
-				redNodes++;
+				this.redNodes++;
 			}
 			countRedNodes(node.left);
 			countRedNodes(node.right);
 		}
-		return redNodes;
+		return this.redNodes;
 	}
 	
 	public int maxDepth(Node node) {
 		if (node == nil) {
 			return 0;
 		}
-		leftDepth = maxDepth(node.left);
-		rightDepth = maxDepth(node.right);
+		int leftDepth = maxDepth(node.left);
+		int rightDepth = maxDepth(node.right);
 		if (leftDepth > rightDepth) {
 			return leftDepth+1;
 		} else {
@@ -63,13 +62,14 @@ public class Tree {
 		if (node == nil) {
 			return 0;
 		}
-		leftDepth = minDepth(node.left);
-		rightDepth = minDepth(node.right);
-		if (leftDepth < rightDepth) {
-			return leftDepth+1;
-		} else {
+		int leftDepth = minDepth(node.left);
+		int rightDepth = minDepth(node.right);
+		if (leftDepth == 0) { // if left subtree is null 
 			return rightDepth+1;
+		} else if (rightDepth == 0) {
+			return leftDepth+1;
 		}
+		return Math.min(leftDepth, rightDepth)+1; // else return lower value
 	}
 	
 	public void insert(Node node) {
@@ -123,7 +123,7 @@ public class Tree {
 				node.parent.parent.color = RED;
 				rotateRight(node.parent.parent); 
 			} else {
-				uncle = node.parent.parent.right;
+				uncle = node.parent.parent.left;
 				if (uncle != nil && uncle.color == RED) { // case1.2
 					node.parent.color = BLACK;
 					uncle.color = BLACK;
