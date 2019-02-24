@@ -4,7 +4,7 @@ public class Tree {
 	private int redNodes = 0;
 	private static final int RED = 0;
 	private static final int BLACK = 1;
-	private final static Node nil = new Node(-1);
+	private final static Node nil = new Node(-1); // null node
 	private Node root = nil;
 	
 	public Node getRoot() {
@@ -34,7 +34,7 @@ public class Tree {
 		print(node.right);
 	}
 	
-	public int countRedNodes(Node node) {
+	public int countRedNodes(Node node) { // go through tree and count red nodes
 		if (node != nil) {
 			if (node.color == RED) {
 				this.redNodes++;
@@ -45,31 +45,22 @@ public class Tree {
 		return this.redNodes;
 	}
 	
-	public int maxDepth(Node node) {
+	public int maxDepth(Node node) { // count depth on left and right and return max
 		if (node == nil) {
 			return 0;
 		}
 		int leftDepth = maxDepth(node.left);
 		int rightDepth = maxDepth(node.right);
-		if (leftDepth > rightDepth) {
-			return leftDepth+1;
-		} else {
-			return rightDepth+1;
-		}
+		return Math.max(leftDepth, rightDepth)+1;
 	}
 	
-	public int minDepth(Node node) {
+	public int minDepth(Node node) { // return min
 		if (node == nil) {
 			return 0;
 		}
 		int leftDepth = minDepth(node.left);
 		int rightDepth = minDepth(node.right);
-		if (leftDepth == 0) { // if left subtree is null 
-			return rightDepth+1;
-		} else if (rightDepth == 0) {
-			return leftDepth+1;
-		}
-		return Math.min(leftDepth, rightDepth)+1; // else return lower value
+		return Math.min(leftDepth, rightDepth)+1;
 	}
 	
 	public void insert(Node node) {
@@ -82,7 +73,7 @@ public class Tree {
 			node.color = RED; // nodes to be inserted are red at start
 			while (true) {
 				if (node.key < y.key) { // go to the left subtree
-					if (y.left == nil) { // if phantom leaf attach node
+					if (y.left == nil) { // if null leaf, attach node
 						y.left = node;
 						node.parent = y;
 						break;
@@ -99,7 +90,7 @@ public class Tree {
 					}
 				}
 			}
-			fixViolation(node); // fix tree
+			fixViolation(node); // fix tree after insertion
 		}
 	}
 	
@@ -107,12 +98,12 @@ public class Tree {
 		while (node.parent.color == RED) {
 			Node uncle = nil;
 			if (node.parent == node.parent.parent.left) {
-				uncle = node.parent.parent.right;
+				uncle = node.parent.parent.right; // parent is on the left - uncle is on the right
 				if (uncle != nil && uncle.color == RED) { // case1: if uncle is red flip colors of nodes
 					node.parent.color = BLACK;
 					uncle.color = BLACK;
 					node.parent.parent.color = RED;
-					node = node.parent.parent;
+					node = node.parent.parent; // set node to grandparent
 					continue;
 				}
 				if (node == node.parent.right) { // case2: right child - rotate by parent

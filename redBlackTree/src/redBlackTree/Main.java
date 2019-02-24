@@ -1,6 +1,6 @@
 package redBlackTree;
 
-public class App {
+public class Main {
 	public static void main(String[] args) {
 		Tree rbTree = new Tree();
 		rbTree.insert(new Node(38));
