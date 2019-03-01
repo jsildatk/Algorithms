@@ -1,5 +1,3 @@
-package redBlackTree;
-
 public class Node {
 	int key = -1;
 	int color = Tree.getBlack();
