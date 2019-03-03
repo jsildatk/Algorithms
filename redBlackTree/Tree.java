@@ -204,23 +204,23 @@ public class Tree {
 		while (node.parent.color == RED) {
 			if (node.parent == node.parent.parent.left) {
 				uncle = node.parent.parent.right; // parent is on the left - uncle is on the right
-				if (uncle != nil && uncle.color == RED) { // case1: if uncle is red flip colors of nodes
+				if (uncle != nil && uncle.color == RED) { // case 1: if uncle is red flip colors of nodes
 					node.parent.color = BLACK;
 					uncle.color = BLACK;
 					node.parent.parent.color = RED;
 					node = node.parent.parent; // set node to grandparent
 					continue; // go to the next
 				}
-				if (node == node.parent.right) { // case2: right child - rotate by parent
+				if (node == node.parent.right) { // case 2: right child - rotate by parent
 					node = node.parent;
 					rotateLeft(node);
 				}
-				node.parent.color = BLACK; // case3: left child - rotate by grandparent and flip colors
+				node.parent.color = BLACK; // case 3: left child - rotate by grandparent and flip colors
 				node.parent.parent.color = RED;
 				rotateRight(node.parent.parent); 
 			} else {
 				uncle = node.parent.parent.left;
-				if (uncle != nil && uncle.color == RED) { // case1.2
+				if (uncle != nil && uncle.color == RED) { // case 1.2
 					node.parent.color = BLACK;
 					uncle.color = BLACK;
 					node.parent.parent.color = RED;
@@ -240,59 +240,45 @@ public class Tree {
 	}
 	
 	private void rotateLeft(Node node) {
-		if (node.parent != nil) { // if its not root
-			if (node == node.parent.left) {
-				node.parent.left = node.right;
-			} else {
-				node.parent.right = node.right;
-			}
-			node.right.parent = node.parent;
-			node.parent = node.right;
-			if (node.right.left != nil) {
-				node.right.left.parent = node;
-			}
-			node.right = node.right.left;
-			node.parent.left = node;
-		} else { // Rotate root
-			Node temp = root.right;
-			root.right = temp.left;
-			temp.left.parent = root;
-			root.parent = temp;
-			temp.left = root;
-			temp.parent = nil;
-			root = temp;
+		Node y = node.right;
+		node.right = y.left; // y's left subtree becomes x's right subtree
+		if (y.left != nil) { // if y has left child
+			y.left.parent = node;
 		}
+		y.parent = node.parent; // link parents
+		if (node.parent == nil) { // if node is root
+			this.root = y;
+		} else if (node == node.parent.left) { // if node is left child
+			node.parent.left = y;
+		} else { // if node is right child
+			node.parent.right = y;
+		}
+		y.left = node; // attach node to y
+		node.parent = y; // set node parent
 	}
 	
 	private void rotateRight(Node node) {
-		if (node.parent != nil) { // if its not root
-			if (node == node.parent.left) {
-				node.parent.left = node.left;
-			} else {
-				node.parent.right = node.left;
-			}
-			node.left.parent = node.parent;
-			node.parent = node.left;
-			if (node.left.right != nil) {
-				node.left.right.parent = node;
-			}
-			node.left = node.left.right;
-			node.parent.right = node;
-		} else { // Rotate root
-			Node temp = root.left;
-			root.left = root.left.right;
-			temp.right.parent = root;
-			root.parent = temp;
-			temp.right = root;
-			temp.parent = nil;
-			root = temp;
+		Node y = node.left;
+		node.left = y.right; // y's right subtree becomes x's left subtree
+		if (y.right != nil) { // if y has right child
+			y.right.parent = node;
 		}
+		y.parent = node.parent; // link parents
+		if (node.parent == nil) { // if node is root
+			this.root = y;
+		} else if (node == node.parent.right) { // if node is right child
+			node.parent.right = y;
+		} else { // if node is left child
+			node.parent.left = y;
+		}
+		y.right = node; // attach node to y
+		node.parent = y; // set node parent
 	}
   
 	private void swap(Node x, Node y) {
 		if (x.parent == nil) { // if x has no parent => y becomes root
 			root = y;
-        } else if (x == x.parent.left) {
+		} else if (x == x.parent.left) {
             x.parent.left = y;
         } else {
             x.parent.right = y;
