@@ -16,7 +16,7 @@ public class Main {
 		System.out.println("-------------------------------");
 		rbTree.print(rbTree.getRoot());
 		rbTree.countRedNodes(rbTree.getRoot());
-		System.out.println("\nIlosc czerwonych wezlow: " + rbTree.getRedNodes());
+		System.out.println("\u001b[37m\nIlosc czerwonych wezlow: " + rbTree.getRedNodes());
 		System.out.println("Max glebokosc: " + rbTree.maxDepth(rbTree.getRoot()));
 		System.out.println("Min glebokosc: " + rbTree.minDepth(rbTree.getRoot()));
 		System.out.println("-------------------------------");
@@ -31,7 +31,7 @@ public class Main {
 		rbTree.print(rbTree.getRoot());
 		rbTree.setRedNodes(0);
 		rbTree.countRedNodes(rbTree.getRoot());
-		System.out.println("\nIlosc czerwonych wezlow: " + rbTree.getRedNodes());
+		System.out.println("\u001b[37m\nIlosc czerwonych wezlow: " + rbTree.getRedNodes());
 		System.out.println("Max glebokosc: " + rbTree.maxDepth(rbTree.getRoot()));
 		System.out.println("Min glebokosc: " + rbTree.minDepth(rbTree.getRoot()));
 		System.out.println("-------------------------------");

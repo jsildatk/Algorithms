@@ -38,11 +38,10 @@ public class Tree {
 		}
 		print(node.left);
 		if (node.color == RED) {
-			temp = "R";
+			System.out.print("\u001b[31m" + node.key + " ");
 		} else {
-			temp = "B";
+			System.out.print("\u001b[35m" + node.key + " ");
 		}
-		System.out.print(node.key + temp + " ");
 		print(node.right);
 	}
 	
@@ -204,14 +203,13 @@ public class Tree {
 		while (node.parent.color == RED) {
 			if (node.parent == node.parent.parent.left) {
 				uncle = node.parent.parent.right; // parent is on the left - uncle is on the right
-				if (uncle != nil && uncle.color == RED) { // case 1: if uncle is red flip colors of nodes
+				if (uncle.color == RED) { // case 1: if uncle is red flip colors of nodes
 					node.parent.color = BLACK;
 					uncle.color = BLACK;
 					node.parent.parent.color = RED;
 					node = node.parent.parent; // set node to grandparent
-					continue; // go to the next
-				}
-				if (node == node.parent.right) { // case 2: right child - rotate by parent
+					continue;
+				} else if (node == node.parent.right) { // case 2: right child - rotate by parent
 					node = node.parent;
 					rotateLeft(node);
 				}
@@ -219,15 +217,14 @@ public class Tree {
 				node.parent.parent.color = RED;
 				rotateRight(node.parent.parent); 
 			} else {
-				uncle = node.parent.parent.left;
-				if (uncle != nil && uncle.color == RED) { // case 1.2
+				uncle = node.parent.parent.left; // parent is on the right - uncle is on the left
+				if (uncle.color == RED) { // case 1.2
 					node.parent.color = BLACK;
 					uncle.color = BLACK;
 					node.parent.parent.color = RED;
 					node = node.parent.parent;
 					continue;
-				}
-				if (node == node.parent.left) { // case 2.2: left child - rotate by parent
+				} else if (node == node.parent.left) { // case 2.2: left child - rotate by parent
 					node = node.parent;
 					rotateRight(node);
 				}
