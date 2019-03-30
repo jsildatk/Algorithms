@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Main {
     private static void print(Node root, String s, HashMap<Character, Integer> map, HashMap<String, Integer> values) {
-        if (root.getLeft() == null && root.getLeft() == null) {
+        if (root.getLeft() == null && root.getRight() == null) {
             System.out.println(root.getKey() + " | " + map.get(root.getKey()) + " | " + s);
             values.put(s, map.get(root.getKey()));
             return;
