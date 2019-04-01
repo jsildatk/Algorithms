@@ -27,19 +27,14 @@ public class Main {
             PriorityQueue<Node> queue = new PriorityQueue<Node>(word.length(), new HuffmanComparator());
             HashMap<String, Integer> values = new HashMap<>(); // map with (huffman code, occurrences)
             for (Map.Entry<Character, Integer> entry : map.entrySet()) {
-                Node node = new Node(entry.getKey(), entry.getValue(), null, null);
-                queue.add(node);
+                queue.add(new Node(entry.getKey(), entry.getValue(), null, null));
             }
             Node root = null;
             while (queue.size() > 1) {
-                Node x = queue.peek(); // first min extract
-                queue.poll();
-
-                Node y = queue.peek(); // second min extract
-                queue.poll();
-
+                Node x = queue.poll(); // first min extract
+                Node y = queue.poll(); // second min extract
                 Node n = new Node('-', x.getValue() + y.getValue(), x, y); // node that is sum of two extracted nodes
-                root = n;
+                root = n; // make new node as a root
                 queue.add(n); // add new node to queue
             }
             print(root, "", map, values);
