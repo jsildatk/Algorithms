@@ -15,3 +15,4 @@ Data Structures and Algorithms UG
 - Red black trees - inserting, searching, deleting, rotations, depths
 - Longest common subquence - printing 1 sequence, iterative version
 - Huffman code - encoding string from file, comparing lengths with original
+- B-tree - inserting, searching, splitting nodes, nodes are saved in memory instead of disk
