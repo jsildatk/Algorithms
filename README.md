@@ -16,3 +16,4 @@ Data Structures and Algorithms UG
 - Longest common subquence - printing 1 sequence, iterative version
 - Huffman code - encoding string from file, comparing lengths with original
 - B-tree - inserting, searching, splitting nodes, nodes are saved in memory instead of disk
+- Disjoint sets - MakeSet, FindSet, Union with ranks and path compression
