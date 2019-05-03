@@ -17,3 +17,4 @@ Data Structures and Algorithms UG
 - Huffman code - encoding string from file, comparing lengths with original
 - B-tree - inserting, searching, splitting nodes, nodes are saved in memory instead of disk
 - Disjoint sets - MakeSet, FindSet, Union with ranks and path compression
+- Kruskal's Minimum Spanning Tree 
