@@ -18,4 +18,5 @@ Data Structures and Algorithms UG
 - B-tree - inserting, searching, splitting nodes, nodes are saved in memory instead of disk
 - Disjoint sets - MakeSet, FindSet, Union with ranks and path compression
 - Kruskal's Minimum Spanning Tree
-- Searching pattern in string - Naive, Rabin-Karp, Knuth-Morris-Pratt 
+- Searching pattern in string - Naive, Rabin-Karp, Knuth-Morris-Pratt
+- Graphs - DFS, BFS with adjacency matrix 
